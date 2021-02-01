@@ -35,6 +35,7 @@ namespace HideGameCode
             public static void Postfix(GameStartManager __instance)
             {
                 __instance.GameRoomName.Text = "TWITCH\r\nPRIME";
+                __instance.GameRoomName.Color = new Color(145 / 255f, 71 / 255f, 255 / 255f);//Twitch color
                 copyToClipboard();
                 var btn = __instance.MakePublicButton.GetComponent<PassiveButton>();
                 btn.OnClick.AddListener((UnityAction) copyToClipboard);
