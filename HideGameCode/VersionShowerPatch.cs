@@ -33,7 +33,7 @@ namespace AmongUsUnknownImpostors.Patches
                 herysiaVersionShower.Text,
                 "\n",
                 "HideGameCode",
-                " v1.0.0",
+                " v1.1.0",
                 " by Herysia#4293"
             });
         }

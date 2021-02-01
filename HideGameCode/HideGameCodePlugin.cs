@@ -1,6 +1,8 @@
-﻿using BepInEx;
+﻿using System;
+using BepInEx;
 using BepInEx.IL2CPP;
 using HarmonyLib;
+using Il2CppSystem.Text.RegularExpressions;
 using Reactor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -29,12 +31,27 @@ namespace HideGameCode
             {
                 GUIUtility.systemCopyBuffer = GameCode.IntToGameName(AmongUsClient.Instance.GameId);
             }
+
             public static void Postfix(GameStartManager __instance)
             {
                 __instance.GameRoomName.Text = "TWITCH\r\nPRIME";
                 copyToClipboard();
                 var btn = __instance.MakePublicButton.GetComponent<PassiveButton>();
-                btn.OnClick.AddListener((UnityAction)copyToClipboard);
+                btn.OnClick.AddListener((UnityAction) copyToClipboard);
+            }
+        }
+
+        [HarmonyPatch(typeof(TextBox), nameof(TextBox.SetText))]
+        public static class TextBox_Update
+        {
+            private static Regex pattern = new Regex(".+");
+
+            public static void Postfix(TextBox __instance)
+            {
+                if (__instance.name == "GameIdText")
+                {
+                    __instance.outputText.Text = new String('*', __instance.text.Length);
+                }
             }
         }
     }
