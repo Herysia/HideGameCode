@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Drawing;
+using System.Globalization;
 using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.IL2CPP;
 using HarmonyLib;
 using Il2CppSystem.Text.RegularExpressions;
 using Reactor;
 using UnityEngine;
 using UnityEngine.Events;
+using Color = UnityEngine.Color;
 
 namespace HideGameCode
 {
@@ -17,10 +21,14 @@ namespace HideGameCode
         public const string Id = "com.herysia.hidegamecode";
 
         public Harmony Harmony { get; } = new Harmony(Id);
+        public ConfigEntry<string> Placeholder { get; private set; }
+        public ConfigEntry<string> CodeColor { get; private set; }
 
 
         public override void Load()
         {
+            Placeholder = Config.Bind("Config", "Placeholder", "TWITCH\n\rPRIME");
+            CodeColor = Config.Bind("Config", "Color", "#9147ff");
             Harmony.PatchAll();
         }
 
@@ -34,8 +42,9 @@ namespace HideGameCode
 
             public static void Postfix(GameStartManager __instance)
             {
-                __instance.GameRoomName.Text = "TWITCH\r\nPRIME";
-                __instance.GameRoomName.Color = new Color(145 / 255f, 71 / 255f, 255 / 255f);//Twitch color
+                __instance.GameRoomName.Text = PluginSingleton<HideGameCodePlugin>.Instance.Placeholder.Value;
+                int rgb = Int32.Parse(PluginSingleton<HideGameCodePlugin>.Instance.CodeColor.Value.Replace("#", ""), NumberStyles.HexNumber);
+                __instance.GameRoomName.Color = new Color(((rgb >> 16) & 0xff) / 255f, ((rgb >> 8) & 0xff) / 255f, (rgb & 0xff) / 255f);
                 copyToClipboard();
                 var btn = __instance.MakePublicButton.GetComponent<PassiveButton>();
                 btn.OnClick.AddListener((UnityAction) copyToClipboard);
