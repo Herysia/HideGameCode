@@ -9,6 +9,10 @@ Among us mod that hides the game code and copy it to clipboard
 -   Automatically copied to clipboard on join, ability to copy again by clicking on the Public/Private button
 -   Game code placeholder and color are customizable
 
+## Customize
+
+-   Edit the fields in `AmongUs/BepInEx/Config/com.herysia.hidegamecode.cfg` using notepad and restart among us
+
 ## Technical stuff
 
 This mod has been made using [Reactor modding framework](https://github.com/NuclearPowered/Reactor), based on BepInEx, it patches the game at runtime and **DOES NOT** modify any game files.
