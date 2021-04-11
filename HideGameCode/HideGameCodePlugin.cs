@@ -6,6 +6,7 @@ using BepInEx.Configuration;
 using BepInEx.IL2CPP;
 using HarmonyLib;
 using Il2CppSystem.Text.RegularExpressions;
+using InnerNet;
 using Reactor;
 using UnityEngine;
 using UnityEngine.Events;

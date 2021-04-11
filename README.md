@@ -17,7 +17,7 @@ Among us mod that hides the game code and copy it to clipboard
 
 This mod has been made using [Reactor modding framework](https://github.com/NuclearPowered/Reactor), based on BepInEx, it patches the game at runtime and **DOES NOT** modify any game files.
 
--   Support Among us v2020.12.9s (Steam only)
+-   Support Among us v2021.3.31.3s (Steam only)
 
 ### Installation
 
