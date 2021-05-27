@@ -7,23 +7,21 @@ using BepInEx.IL2CPP;
 using HarmonyLib;
 using Il2CppSystem.Text.RegularExpressions;
 using InnerNet;
-using Reactor;
 using UnityEngine;
 using UnityEngine.Events;
 using Color = UnityEngine.Color;
 
 namespace HideGameCode
 {
-    [BepInPlugin(Id)]
+    [BepInPlugin(Id, "HideGameCode", "1.1.0")]
     [BepInProcess("Among Us.exe")]
-    [BepInDependency(ReactorPlugin.Id)]
     public class HideGameCodePlugin : BasePlugin
     {
         public const string Id = "com.herysia.hidegamecode";
-
         public Harmony Harmony { get; } = new Harmony(Id);
-        public ConfigEntry<string> Placeholder { get; private set; }
-        public ConfigEntry<string> CodeColor { get; private set; }
+        public static HideGameCodePlugin Instance;
+        public static ConfigEntry<string> Placeholder { get; set; }
+        public static ConfigEntry<string> CodeColor { get; set; }
 
 
         public override void Load()
@@ -43,25 +41,21 @@ namespace HideGameCode
 
             public static void Postfix(GameStartManager __instance)
             {
-                __instance.GameRoomName.Text = PluginSingleton<HideGameCodePlugin>.Instance.Placeholder.Value;
-                int rgb = Int32.Parse(PluginSingleton<HideGameCodePlugin>.Instance.CodeColor.Value.Replace("#", ""), NumberStyles.HexNumber);
-                __instance.GameRoomName.Color = new Color(((rgb >> 16) & 0xff) / 255f, ((rgb >> 8) & 0xff) / 255f, (rgb & 0xff) / 255f);
+                __instance.GameRoomName.text = $"<color={HideGameCodePlugin.CodeColor.Value}>{HideGameCodePlugin.Placeholder.Value}</color>";
+                __instance.GameRoomName.transform.localPosition = new Vector3(0.0f, -0.95f);
                 copyToClipboard();
                 var btn = __instance.MakePublicButton.GetComponent<PassiveButton>();
                 btn.OnClick.AddListener((UnityAction) copyToClipboard);
             }
         }
 
-        [HarmonyPatch(typeof(TextBox), nameof(TextBox.SetText))]
-        public static class TextBox_Update
-        {
+        [HarmonyPatch(typeof(TextBoxTMP), nameof(TextBoxTMP.SetText))]
+        public static class TextBoxTMP_Update {
             private static Regex pattern = new Regex(".+");
-
-            public static void Postfix(TextBox __instance)
-            {
+            public static void Postfix(TextBoxTMP __instance) {
                 if (__instance.name == "GameIdText")
                 {
-                    __instance.outputText.Text = new String('*', __instance.text.Length);
+                    __instance.outputText.text = new String('*', __instance.text.Length);
                 }
             }
         }
