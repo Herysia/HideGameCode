@@ -9,11 +9,9 @@ using Il2CppSystem.Text.RegularExpressions;
 using InnerNet;
 using UnityEngine;
 using UnityEngine.Events;
-using Color = UnityEngine.Color;
-
 namespace HideGameCode
 {
-    [BepInPlugin(Id, "HideGameCode", "1.1.0")]
+    [BepInPlugin(Id, "HideGameCode", "1.1.2")]
     [BepInProcess("Among Us.exe")]
     public class HideGameCodePlugin : BasePlugin
     {

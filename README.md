@@ -21,7 +21,7 @@ Among Us mod that hides the game code and copy it to clipboard
 All players should have the mod install for the best user experience
 
 -   Download the [lastest release](https://github.com/Herysia/HideGameCode/releases/latest).
--   Extract the files into Among us game folder (`steam/steamapps/common/Among us`)
+-   Extract the files into Among us game folder (`steam/steamapps/common/Among Us`)
 -   This should look like this
     ![looklikethis](./Visuals/looklikethis.png)
 -   **Run the game from steam**
@@ -62,7 +62,7 @@ HideGameCode is licensed under the MIT License. See [LICENSE](LICENSE.md) for th
 
 Third-party libraries:
 
--   [Reactor](https://github.com/NuclearPowered/Reactor) is license under the LGPL v3.0 License. See [LICENSE](https://github.com/NuclearPowered/Reactor/blob/master/LICENSE) for the full License. It is used before v1.1.0 releases.
+-   [Reactor](https://github.com/NuclearPowered/Reactor) is license under the LGPL v3.0 License. See [LICENSE](https://github.com/NuclearPowered/Reactor/blob/master/LICENSE) for the full License. It is used before v1.1.2 releases.
 -   [BepInEx (Reactor fork)](https://github.com/NuclearPowered/BepInEx) is licensed under the LGPL 2.1 License. See [LICENSE](https://github.com/NuclearPowered/BepInEx/blob/master/LICENSE) for the full License.
 -   Unity Runtime libraries are part of Unity Software.
     Their usage is subject to [Unity Terms of Service](https://unity3d.com/legal/terms-of-service), including [Unity Software Additional Terms](https://unity3d.com/legal/terms-of-service/software).
